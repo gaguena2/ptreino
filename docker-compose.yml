@@ -1,4 +1,17 @@
 services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: ptreino-web
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+    networks:
+      - ptreino-net
+
   server:
     build:
       context: ./server
