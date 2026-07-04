@@ -34,6 +34,14 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6">
+      {children}
+    </div>
+  );
+}
+
 export function RegisterPage() {
   const navigate = useNavigate();
 
@@ -66,26 +74,64 @@ export function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-xl mx-auto">
-        <div className="text-center mb-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-start py-8 px-4">
+      <div className="w-full max-w-lg">
+
+        {/* Header */}
+        <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-indigo-600">PTreino</h1>
-          <p className="text-gray-500 mt-1">Preencha seus dados para calcularmos seu plano ideal</p>
+          <p className="text-gray-500 text-sm mt-1">
+            Preencha seus dados para calcularmos seu plano ideal
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
 
           {/* Dados pessoais */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+          <Card>
             <SectionTitle>Dados pessoais</SectionTitle>
 
-            <FormField label="Nome completo" placeholder="Seu nome" error={errors.name?.message} {...register('name')} />
-            <FormField label="E-mail" type="email" placeholder="seu@email.com" error={errors.email?.message} {...register('email')} />
+            <FormField
+              label="Nome completo"
+              placeholder="Seu nome"
+              autoComplete="name"
+              error={errors.name?.message}
+              {...register('name')}
+            />
+            <FormField
+              label="E-mail"
+              type="email"
+              placeholder="seu@email.com"
+              autoComplete="email"
+              error={errors.email?.message}
+              {...register('email')}
+            />
 
-            <div className="grid grid-cols-3 gap-3">
-              <FormField label="Idade" type="number" placeholder="25" error={errors.age?.message} {...register('age')} />
-              <FormField label="Peso (kg)" type="number" placeholder="70" error={errors.weight?.message} {...register('weight')} />
-              <FormField label="Altura (cm)" type="number" placeholder="175" error={errors.height?.message} {...register('height')} />
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <FormField
+                label="Idade"
+                type="number"
+                placeholder="25"
+                inputMode="numeric"
+                error={errors.age?.message}
+                {...register('age')}
+              />
+              <FormField
+                label="Peso (kg)"
+                type="number"
+                placeholder="70"
+                inputMode="decimal"
+                error={errors.weight?.message}
+                {...register('weight')}
+              />
+              <FormField
+                label="Altura (cm)"
+                type="number"
+                placeholder="175"
+                inputMode="numeric"
+                error={errors.height?.message}
+                {...register('height')}
+              />
             </div>
 
             <Controller
@@ -99,10 +145,10 @@ export function RegisterPage() {
                 />
               )}
             />
-          </div>
+          </Card>
 
           {/* Nível de atividade */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+          <Card>
             <SectionTitle>Nível de atividade física</SectionTitle>
             <Controller
               control={control}
@@ -116,10 +162,10 @@ export function RegisterPage() {
                 />
               )}
             />
-          </div>
+          </Card>
 
           {/* Objetivo */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+          <Card>
             <SectionTitle>Objetivo principal</SectionTitle>
             <Controller
               control={control}
@@ -133,14 +179,28 @@ export function RegisterPage() {
                 />
               )}
             />
-          </div>
+          </Card>
 
           {/* Segurança */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+          <Card>
             <SectionTitle>Segurança</SectionTitle>
-            <FormField label="Senha" type="password" placeholder="Mínimo 6 caracteres" error={errors.password?.message} {...register('password')} />
-            <FormField label="Confirmar senha" type="password" placeholder="Repita a senha" error={errors.confirmPassword?.message} {...register('confirmPassword')} />
-          </div>
+            <FormField
+              label="Senha"
+              type="password"
+              placeholder="Mínimo 6 caracteres"
+              autoComplete="new-password"
+              error={errors.password?.message}
+              {...register('password')}
+            />
+            <FormField
+              label="Confirmar senha"
+              type="password"
+              placeholder="Repita a senha"
+              autoComplete="new-password"
+              error={errors.confirmPassword?.message}
+              {...register('confirmPassword')}
+            />
+          </Card>
 
           {errors.root && (
             <p className="text-sm text-red-500 text-center">{errors.root.message}</p>
@@ -149,12 +209,12 @@ export function RegisterPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition text-base"
           >
             {isSubmitting ? 'Criando conta…' : 'Criar conta'}
           </button>
 
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-gray-500 pb-8">
             Já tem uma conta?{' '}
             <Link to="/login" className="text-indigo-600 font-bold hover:underline">
               Entrar
