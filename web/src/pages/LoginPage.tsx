@@ -29,15 +29,21 @@ export function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-indigo-600 px-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-white tracking-tight">PTreino</h1>
-          <p className="text-indigo-200 mt-2">Seu parceiro de treinos</p>
+    <div
+      className="min-vh-100 d-flex align-items-center justify-content-center px-3"
+      style={{ background: 'linear-gradient(135deg, #6366f1 0%, #7c3aed 100%)' }}
+    >
+      <div className="w-100" style={{ maxWidth: 420 }}>
+
+        {/* Logo */}
+        <div className="text-center mb-4">
+          <h1 className="fw-bold text-white display-5 mb-1">PTreino</h1>
+          <p className="text-white-50">Seu parceiro de treinos</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Entrar</h2>
+        {/* Card */}
+        <div className="card border-0 shadow-lg rounded-4 p-4">
+          <h5 className="fw-bold mb-4">Entrar</h5>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <FormField
@@ -58,34 +64,35 @@ export function LoginPage() {
               {...register('password')}
             />
 
-            <div className="flex justify-end mb-4">
-              <button
-                type="button"
-                className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
-              >
+            <div className="text-end mb-3">
+              <button type="button" className="btn btn-link btn-sm p-0 text-primary text-decoration-none">
                 Esqueci minha senha
               </button>
             </div>
 
             {errors.root && (
-              <p className="text-sm text-red-500 mb-4 text-center">
+              <div className="alert alert-danger py-2 text-center small">
                 {errors.root.message}
-              </p>
+              </div>
             )}
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-lg transition"
+              className="btn btn-primary w-100 py-2 fw-semibold"
+              style={{ backgroundColor: '#6366f1', borderColor: '#6366f1' }}
             >
-              {isSubmitting ? 'Entrando…' : 'Entrar'}
+              {isSubmitting ? (
+                <><span className="spinner-border spinner-border-sm me-2" />Entrando…</>
+              ) : 'Entrar'}
             </button>
           </form>
         </div>
 
-        <p className="text-center mt-6 text-indigo-200 text-sm">
+        {/* Footer */}
+        <p className="text-center mt-3 text-white-50 small">
           Não tem uma conta?{' '}
-          <Link to="/register" className="text-white font-bold hover:underline">
+          <Link to="/register" className="text-white fw-bold text-decoration-none">
             Cadastre-se
           </Link>
         </p>

@@ -18,45 +18,32 @@ export function OptionSelector<T extends string>({
   error,
 }: OptionSelectorProps<T>) {
   return (
-    <div className="flex flex-col gap-2 mb-4">
+    <div>
       {options.map((opt) => {
         const selected = value === opt.value;
         return (
-          <button
+          <div
             key={opt.value}
-            type="button"
+            className={`option-card ${selected ? 'selected' : ''}`}
             onClick={() => onChange(opt.value)}
-            className={`flex items-center gap-3 p-3 rounded-lg border text-left transition ${
-              selected
-                ? 'border-indigo-500 bg-indigo-50'
-                : 'border-gray-200 bg-white hover:border-indigo-300'
-            }`}
           >
-            <span
-              className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                selected ? 'border-indigo-600' : 'border-gray-300'
-              }`}
-            >
-              {selected && (
-                <span className="w-2 h-2 rounded-full bg-indigo-600" />
-              )}
-            </span>
-            <span className="flex flex-col">
-              <span
-                className={`text-sm font-medium ${
-                  selected ? 'text-indigo-700' : 'text-gray-800'
-                }`}
-              >
+            <div className="radio-circle">
+              {selected && <div className="radio-dot" />}
+            </div>
+            <div>
+              <div className={`fw-medium small ${selected ? 'text-primary' : ''}`}>
                 {opt.label}
-              </span>
+              </div>
               {opt.description && (
-                <span className="text-xs text-gray-500">{opt.description}</span>
+                <div className="text-muted" style={{ fontSize: '0.75rem' }}>
+                  {opt.description}
+                </div>
               )}
-            </span>
-          </button>
+            </div>
+          </div>
         );
       })}
-      {error && <span className="text-xs text-red-500">{error}</span>}
+      {error && <div className="text-danger small mt-1">{error}</div>}
     </div>
   );
 }

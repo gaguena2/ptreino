@@ -39,13 +39,7 @@ export function HomePage() {
     if (!stored) { navigate('/login'); return; }
     setUser(JSON.parse(stored));
 
-    api.get('/users/me').then((res) => {
-      const u = res.data;
-      setUser(u);
-      if (u.weight && u.height) {
-        // recalculate from profile endpoint when available
-      }
-    }).catch(() => {});
+    api.get('/users/me').then((res) => setUser(res.data)).catch(() => {});
   }, [navigate]);
 
   function logout() {
@@ -57,77 +51,70 @@ export function HomePage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-indigo-600 text-white px-6 py-4 flex items-center justify-between shadow">
-        <span className="text-2xl font-bold tracking-tight">PTreino</span>
-        <div className="flex items-center gap-4">
-          <span className="text-indigo-200 text-sm">{user.name}</span>
-          <button
-            onClick={logout}
-            className="text-sm bg-indigo-500 hover:bg-indigo-400 px-3 py-1.5 rounded-lg transition"
-          >
+    <div className="min-vh-100 bg-light">
+      {/* Navbar */}
+      <nav className="navbar px-3 px-md-4 shadow-sm" style={{ background: 'linear-gradient(135deg, #6366f1 0%, #7c3aed 100%)' }}>
+        <span className="navbar-brand text-white fw-bold fs-4 mb-0">PTreino</span>
+        <div className="d-flex align-items-center gap-3">
+          <span className="text-white-50 small d-none d-sm-inline">{user.name}</span>
+          <button onClick={logout} className="btn btn-sm btn-light btn-outline-light text-white border-white-50 px-3">
             Sair
           </button>
         </div>
-      </header>
+      </nav>
 
-      <main className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      <div className="container py-4" style={{ maxWidth: 720 }}>
         {/* Boas-vindas */}
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            Olá, {user.name.split(' ')[0]}! 👋
-          </h2>
-          <p className="text-gray-500 mt-1">Aqui está seu resumo de hoje.</p>
+        <div className="mb-4">
+          <h4 className="fw-bold mb-1">Olá, {user.name.split(' ')[0]}! 👋</h4>
+          <p className="text-muted small mb-0">Aqui está seu resumo.</p>
         </div>
 
-        {/* Cards de info */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white rounded-2xl shadow-sm p-5">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">Objetivo</p>
-            <p className="text-lg font-bold text-indigo-600">
-              {GOAL_LABELS[user.goal] ?? user.goal}
-            </p>
+        {/* Cards objetivo + atividade */}
+        <div className="row g-3 mb-3">
+          <div className="col-6">
+            <div className="card border-0 shadow-sm rounded-4 p-3 h-100">
+              <p className="section-label mb-1">Objetivo</p>
+              <p className="fw-bold text-primary mb-0">{GOAL_LABELS[user.goal] ?? user.goal}</p>
+            </div>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm p-5">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-1">Atividade</p>
-            <p className="text-lg font-bold text-indigo-600">
-              {ACTIVITY_LABELS[user.activityLevel] ?? user.activityLevel}
-            </p>
+          <div className="col-6">
+            <div className="card border-0 shadow-sm rounded-4 p-3 h-100">
+              <p className="section-label mb-1">Atividade</p>
+              <p className="fw-bold text-primary mb-0" style={{ fontSize: '0.9rem' }}>
+                {ACTIVITY_LABELS[user.activityLevel] ?? user.activityLevel}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Calorias — placeholder até ter endpoint */}
-        <div className="bg-white rounded-2xl shadow-sm p-6">
-          <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold mb-4">
-            Estimativa calórica diária
-          </p>
-          <div className="grid grid-cols-3 gap-4 text-center">
+        {/* Calorias */}
+        <div className="card border-0 shadow-sm rounded-4 p-4 mb-3">
+          <p className="section-label">Estimativa calórica diária</p>
+          <div className="row text-center g-2">
             {[
               { label: 'TMB', value: fitness?.tmb, hint: 'em repouso' },
               { label: 'GET', value: fitness?.get, hint: 'gasto total' },
               { label: 'Meta', value: fitness?.targetCalories, hint: 'seu objetivo' },
             ].map(({ label, value, hint }) => (
-              <div key={label} className="flex flex-col gap-1">
-                <span className="text-2xl font-bold text-gray-900">
-                  {value ?? '—'}
-                </span>
-                <span className="text-sm font-semibold text-indigo-600">{label}</span>
-                <span className="text-xs text-gray-400">{hint}</span>
+              <div key={label} className="col-4">
+                <div className="fs-4 fw-bold">{value ?? '—'}</div>
+                <div className="text-primary fw-semibold small">{label}</div>
+                <div className="text-muted" style={{ fontSize: '0.7rem' }}>{hint}</div>
               </div>
             ))}
           </div>
-          <p className="text-xs text-gray-400 mt-4 text-center">
+          <p className="text-muted text-center mt-3 mb-0" style={{ fontSize: '0.7rem' }}>
             kcal/dia · fórmula Mifflin-St Jeor
           </p>
         </div>
 
-        {/* Em breve */}
-        <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 text-center">
-          <p className="text-indigo-600 font-semibold">Seus treinos aparecerão aqui em breve</p>
-          <p className="text-indigo-400 text-sm mt-1">Estamos construindo esta seção</p>
+        {/* Placeholder treinos */}
+        <div className="card border-0 rounded-4 p-4 text-center" style={{ background: '#eef2ff' }}>
+          <p className="text-primary fw-semibold mb-1">Seus treinos aparecerão aqui em breve</p>
+          <p className="text-muted small mb-0">Estamos construindo esta seção</p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -26,22 +26,6 @@ const GOAL_OPTIONS: { value: Goal; label: string; description: string }[] = [
   { value: 'maintenance', label: 'Manutenção / Estética', description: 'Manter peso e melhorar composição' },
 ];
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
-      {children}
-    </p>
-  );
-}
-
-function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6">
-      {children}
-    </div>
-  );
-}
-
 export function RegisterPage() {
   const navigate = useNavigate();
 
@@ -74,82 +58,53 @@ export function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-start py-8 px-4">
-      <div className="w-full max-w-lg">
+    <div className="min-vh-100 bg-light py-4 px-3">
+      <div className="mx-auto" style={{ maxWidth: 540 }}>
 
         {/* Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-indigo-600">PTreino</h1>
-          <p className="text-gray-500 text-sm mt-1">
-            Preencha seus dados para calcularmos seu plano ideal
-          </p>
+        <div className="text-center mb-4">
+          <h1 className="fw-bold text-primary">PTreino</h1>
+          <p className="text-muted small">Preencha seus dados para calcularmos seu plano ideal</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
           {/* Dados pessoais */}
-          <Card>
-            <SectionTitle>Dados pessoais</SectionTitle>
+          <div className="card border-0 shadow-sm rounded-4 p-4 mb-3">
+            <p className="section-label">Dados pessoais</p>
 
-            <FormField
-              label="Nome completo"
-              placeholder="Seu nome"
-              autoComplete="name"
-              error={errors.name?.message}
-              {...register('name')}
-            />
-            <FormField
-              label="E-mail"
-              type="email"
-              placeholder="seu@email.com"
-              autoComplete="email"
-              error={errors.email?.message}
-              {...register('email')}
-            />
+            <FormField label="Nome completo" placeholder="Seu nome" autoComplete="name"
+              error={errors.name?.message} {...register('name')} />
+            <FormField label="E-mail" type="email" placeholder="seu@email.com" autoComplete="email"
+              error={errors.email?.message} {...register('email')} />
 
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              <FormField
-                label="Idade"
-                type="number"
-                placeholder="25"
-                inputMode="numeric"
-                error={errors.age?.message}
-                {...register('age')}
-              />
-              <FormField
-                label="Peso (kg)"
-                type="number"
-                placeholder="70"
-                inputMode="decimal"
-                error={errors.weight?.message}
-                {...register('weight')}
-              />
-              <FormField
-                label="Altura (cm)"
-                type="number"
-                placeholder="175"
-                inputMode="numeric"
-                error={errors.height?.message}
-                {...register('height')}
-              />
+            <div className="row g-2 mb-1">
+              <div className="col-4">
+                <FormField label="Idade" type="number" placeholder="25" inputMode="numeric"
+                  error={errors.age?.message} {...register('age')} />
+              </div>
+              <div className="col-4">
+                <FormField label="Peso (kg)" type="number" placeholder="70" inputMode="decimal"
+                  error={errors.weight?.message} {...register('weight')} />
+              </div>
+              <div className="col-4">
+                <FormField label="Altura (cm)" type="number" placeholder="175" inputMode="numeric"
+                  error={errors.height?.message} {...register('height')} />
+              </div>
             </div>
 
             <Controller
               control={control}
               name="sex"
               render={({ field }) => (
-                <SexSelector
-                  value={field.value ?? ''}
-                  onChange={field.onChange}
-                  error={errors.sex?.message}
-                />
+                <SexSelector value={field.value ?? ''} onChange={field.onChange} error={errors.sex?.message} />
               )}
             />
-          </Card>
+          </div>
 
           {/* Nível de atividade */}
-          <Card>
-            <SectionTitle>Nível de atividade física</SectionTitle>
+          <div className="card border-0 shadow-sm rounded-4 p-4 mb-3">
+            <p className="section-label">Nível de atividade física</p>
             <Controller
               control={control}
               name="activityLevel"
@@ -162,11 +117,11 @@ export function RegisterPage() {
                 />
               )}
             />
-          </Card>
+          </div>
 
           {/* Objetivo */}
-          <Card>
-            <SectionTitle>Objetivo principal</SectionTitle>
+          <div className="card border-0 shadow-sm rounded-4 p-4 mb-3">
+            <p className="section-label">Objetivo principal</p>
             <Controller
               control={control}
               name="goal"
@@ -179,46 +134,35 @@ export function RegisterPage() {
                 />
               )}
             />
-          </Card>
+          </div>
 
           {/* Segurança */}
-          <Card>
-            <SectionTitle>Segurança</SectionTitle>
-            <FormField
-              label="Senha"
-              type="password"
-              placeholder="Mínimo 6 caracteres"
-              autoComplete="new-password"
-              error={errors.password?.message}
-              {...register('password')}
-            />
-            <FormField
-              label="Confirmar senha"
-              type="password"
-              placeholder="Repita a senha"
-              autoComplete="new-password"
-              error={errors.confirmPassword?.message}
-              {...register('confirmPassword')}
-            />
-          </Card>
+          <div className="card border-0 shadow-sm rounded-4 p-4 mb-3">
+            <p className="section-label">Segurança</p>
+            <FormField label="Senha" type="password" placeholder="Mínimo 6 caracteres" autoComplete="new-password"
+              error={errors.password?.message} {...register('password')} />
+            <FormField label="Confirmar senha" type="password" placeholder="Repita a senha" autoComplete="new-password"
+              error={errors.confirmPassword?.message} {...register('confirmPassword')} />
+          </div>
 
           {errors.root && (
-            <p className="text-sm text-red-500 text-center">{errors.root.message}</p>
+            <div className="alert alert-danger small text-center py-2">{errors.root.message}</div>
           )}
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition text-base"
+            className="btn btn-primary w-100 py-2 fw-semibold rounded-3 mb-3"
+            style={{ backgroundColor: '#6366f1', borderColor: '#6366f1' }}
           >
-            {isSubmitting ? 'Criando conta…' : 'Criar conta'}
+            {isSubmitting ? (
+              <><span className="spinner-border spinner-border-sm me-2" />Criando conta…</>
+            ) : 'Criar conta'}
           </button>
 
-          <p className="text-center text-sm text-gray-500 pb-8">
+          <p className="text-center text-muted small pb-4">
             Já tem uma conta?{' '}
-            <Link to="/login" className="text-indigo-600 font-bold hover:underline">
-              Entrar
-            </Link>
+            <Link to="/login" className="text-primary fw-bold text-decoration-none">Entrar</Link>
           </p>
         </form>
       </div>

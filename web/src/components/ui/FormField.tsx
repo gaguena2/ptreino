@@ -7,18 +7,16 @@ interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
-  function FormField({ label, error, className = '', ...props }, ref) {
+  function FormField({ label, error, ...props }, ref) {
     return (
-      <div className="flex flex-col gap-1 mb-4">
-        <label className="text-sm font-medium text-gray-700">{label}</label>
+      <div className="mb-3">
+        <label className="form-label fw-medium small">{label}</label>
         <input
           ref={ref}
-          className={`border rounded-lg px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition ${
-            error ? 'border-red-400' : 'border-gray-300'
-          } ${className}`}
+          className={`form-control ${error ? 'is-invalid' : ''}`}
           {...props}
         />
-        {error && <span className="text-xs text-red-500">{error}</span>}
+        {error && <div className="invalid-feedback">{error}</div>}
       </div>
     );
   },
