@@ -32,7 +32,7 @@ const ACTIVITY_LABELS: Record<string, string> = {
 export function HomePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
-  const [fitness, setFitness] = useState<FitnessProfile | null>(null);
+  const [fitness] = useState<FitnessProfile | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem('user');

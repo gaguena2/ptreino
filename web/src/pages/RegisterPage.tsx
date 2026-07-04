@@ -47,7 +47,13 @@ export function RegisterPage() {
 
   async function onSubmit(data: RegisterFormData) {
     try {
-      const { confirmPassword, ...payload } = data;
+      const { confirmPassword, age, weight, height, ...rest } = data;
+      const payload = {
+        ...rest,
+        age: parseInt(age, 10),
+        weight: parseFloat(weight),
+        height: parseFloat(height),
+      };
       const res = await api.post('/auth/register', payload);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));

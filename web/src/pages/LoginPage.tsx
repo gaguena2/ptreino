@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormField } from '../components/ui/FormField';
@@ -8,7 +7,6 @@ import { type LoginFormData, loginSchema } from '../schemas/login';
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const passwordRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -57,7 +55,6 @@ export function LoginPage() {
               placeholder="Sua senha"
               autoComplete="current-password"
               error={errors.password?.message}
-              ref={passwordRef}
               {...register('password')}
             />
 

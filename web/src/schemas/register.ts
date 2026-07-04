@@ -19,20 +19,28 @@ export const registerSchema = z
     email: z.string().email('E-mail inválido'),
     password: z.string().min(6, 'Mínimo 6 caracteres'),
     confirmPassword: z.string(),
-    age: z.coerce
-      .number({ error: 'Informe sua idade' })
-      .int()
-      .min(10, 'Idade mínima: 10')
-      .max(100, 'Idade máxima: 100'),
+    age: z
+      .string()
+      .min(1, 'Informe sua idade')
+      .refine((v) => {
+        const n = parseInt(v, 10);
+        return !isNaN(n) && n >= 10 && n <= 100;
+      }, 'Idade entre 10 e 100'),
     sex: z.enum(['male', 'female', 'other'], 'Selecione um sexo'),
-    weight: z.coerce
-      .number({ error: 'Informe seu peso' })
-      .positive('Peso inválido')
-      .max(500),
-    height: z.coerce
-      .number({ error: 'Informe sua altura' })
-      .positive('Altura inválida')
-      .max(300),
+    weight: z
+      .string()
+      .min(1, 'Informe seu peso')
+      .refine((v) => {
+        const n = parseFloat(v);
+        return !isNaN(n) && n > 0 && n < 500;
+      }, 'Peso inválido'),
+    height: z
+      .string()
+      .min(1, 'Informe sua altura')
+      .refine((v) => {
+        const n = parseFloat(v);
+        return !isNaN(n) && n > 0 && n < 300;
+      }, 'Altura inválida'),
     activityLevel: z.enum(ACTIVITY_LEVELS, 'Selecione seu nível de atividade'),
     goal: z.enum(GOALS, 'Selecione seu objetivo'),
   })
