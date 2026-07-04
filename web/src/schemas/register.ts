@@ -20,27 +20,21 @@ export const registerSchema = z
     password: z.string().min(6, 'Mínimo 6 caracteres'),
     confirmPassword: z.string(),
     age: z.coerce
-      .number({ invalid_type_error: 'Informe sua idade' })
+      .number({ error: 'Informe sua idade' })
       .int()
       .min(10, 'Idade mínima: 10')
       .max(100, 'Idade máxima: 100'),
-    sex: z.enum(['male', 'female', 'other'], {
-      errorMap: () => ({ message: 'Selecione um sexo' }),
-    }),
+    sex: z.enum(['male', 'female', 'other'], 'Selecione um sexo'),
     weight: z.coerce
-      .number({ invalid_type_error: 'Informe seu peso' })
+      .number({ error: 'Informe seu peso' })
       .positive('Peso inválido')
       .max(500),
     height: z.coerce
-      .number({ invalid_type_error: 'Informe sua altura' })
+      .number({ error: 'Informe sua altura' })
       .positive('Altura inválida')
       .max(300),
-    activityLevel: z.enum(ACTIVITY_LEVELS, {
-      errorMap: () => ({ message: 'Selecione seu nível de atividade' }),
-    }),
-    goal: z.enum(GOALS, {
-      errorMap: () => ({ message: 'Selecione seu objetivo' }),
-    }),
+    activityLevel: z.enum(ACTIVITY_LEVELS, 'Selecione seu nível de atividade'),
+    goal: z.enum(GOALS, 'Selecione seu objetivo'),
   })
   .refine((d) => d.password === d.confirmPassword, {
     message: 'As senhas não coincidem',
