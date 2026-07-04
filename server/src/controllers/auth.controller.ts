@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import type { Request, Response } from 'express';
 import { z } from 'zod';
 import { signToken } from '../utils/jwt';
+import { calcFitnessProfile } from '../utils/fitness';
 import { prisma } from '../utils/prisma';
 
 const registerSchema = z.object({
@@ -10,8 +11,16 @@ const registerSchema = z.object({
   password: z.string().min(6),
   age: z.number().int().min(10).max(100),
   sex: z.enum(['male', 'female', 'other']),
-  weight: z.number().optional(),
-  height: z.number().optional(),
+  weight: z.number().positive().optional(),
+  height: z.number().positive().optional(),
+  activityLevel: z.enum([
+    'sedentary',
+    'lightly_active',
+    'moderately_active',
+    'very_active',
+    'extremely_active',
+  ]),
+  goal: z.enum(['weight_loss', 'hypertrophy', 'maintenance']),
 });
 
 const loginSchema = z.object({
@@ -26,7 +35,8 @@ export async function register(req: Request, res: Response) {
     return;
   }
 
-  const { name, email, password, age, sex, weight, height } = result.data;
+  const { name, email, password, age, sex, weight, height, activityLevel, goal } =
+    result.data;
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
@@ -36,12 +46,27 @@ export async function register(req: Request, res: Response) {
 
   const hashed = await bcrypt.hash(password, 10);
   const user = await prisma.user.create({
-    data: { name, email, password: hashed, age, sex, weight, height },
-    select: { id: true, name: true, email: true, age: true, sex: true },
+    data: { name, email, password: hashed, age, sex, weight, height, activityLevel, goal },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      age: true,
+      sex: true,
+      weight: true,
+      height: true,
+      activityLevel: true,
+      goal: true,
+    },
   });
 
+  const fitnessProfile =
+    weight && height
+      ? calcFitnessProfile({ weight, height, age, sex, activityLevel, goal })
+      : null;
+
   const token = signToken({ userId: user.id });
-  res.status(201).json({ user, token });
+  res.status(201).json({ user, fitnessProfile, token });
 }
 
 export async function login(req: Request, res: Response) {
@@ -65,7 +90,19 @@ export async function login(req: Request, res: Response) {
     return;
   }
 
+  const fitnessProfile =
+    user.weight && user.height
+      ? calcFitnessProfile({
+          weight: user.weight,
+          height: user.height,
+          age: user.age,
+          sex: user.sex,
+          activityLevel: user.activityLevel,
+          goal: user.goal,
+        })
+      : null;
+
   const token = signToken({ userId: user.id });
   const { password: _, ...safeUser } = user;
-  res.json({ user: safeUser, token });
+  res.json({ user: safeUser, fitnessProfile, token });
 }

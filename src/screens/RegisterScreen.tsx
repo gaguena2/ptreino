@@ -13,12 +13,60 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FormField } from '../components/common/FormField';
+import { OptionSelector } from '../components/common/OptionSelector';
 import { SexSelector } from '../components/common/SexSelector';
 import { colors, theme } from '../constants';
 import { type RegisterFormData, registerSchema } from '../schemas/register';
+import type { ActivityLevel, Goal } from '../schemas/register';
 import type { RootStackParamList } from '../types';
 
 type Nav = NativeStackNavigationProp<RootStackParamList, 'Register'>;
+
+const ACTIVITY_OPTIONS: { value: ActivityLevel; label: string; description: string }[] = [
+  {
+    value: 'sedentary',
+    label: 'Sedentário',
+    description: 'Pouco ou nenhum exercício',
+  },
+  {
+    value: 'lightly_active',
+    label: 'Levemente ativo',
+    description: 'Exercício leve 1–3 dias por semana',
+  },
+  {
+    value: 'moderately_active',
+    label: 'Moderadamente ativo',
+    description: 'Exercício moderado 3–5 dias por semana',
+  },
+  {
+    value: 'very_active',
+    label: 'Muito ativo',
+    description: 'Exercício intenso 6–7 dias por semana',
+  },
+  {
+    value: 'extremely_active',
+    label: 'Extremamente ativo',
+    description: 'Treino pesado diário ou trabalho físico intenso',
+  },
+];
+
+const GOAL_OPTIONS: { value: Goal; label: string; description: string }[] = [
+  {
+    value: 'weight_loss',
+    label: 'Emagrecimento',
+    description: 'Reduzir gordura corporal com déficit calórico',
+  },
+  {
+    value: 'hypertrophy',
+    label: 'Hipertrofia',
+    description: 'Ganhar massa muscular com superávit calórico',
+  },
+  {
+    value: 'maintenance',
+    label: 'Manutenção / Estética',
+    description: 'Manter o peso e melhorar a composição corporal',
+  },
+];
 
 export function RegisterScreen() {
   const navigation = useNavigation<Nav>();
@@ -37,11 +85,13 @@ export function RegisterScreen() {
       sex: undefined,
       weight: '',
       height: '',
+      activityLevel: undefined,
+      goal: undefined,
     },
   });
 
   async function onSubmit(data: RegisterFormData) {
-    // Substitua pelo serviço de cadastro real
+    // Substitua pela chamada real à API
     await new Promise((r) => setTimeout(r, 1000));
     Alert.alert('Cadastro realizado!', `Bem-vindo(a), ${data.name}!`, [
       { text: 'Fazer login', onPress: () => navigation.navigate('Login') },
@@ -57,9 +107,10 @@ export function RegisterScreen() {
       >
         <Text style={styles.title}>Crie sua conta</Text>
         <Text style={styles.subtitle}>
-          Preencha seus dados para começar a treinar
+          Preencha seus dados para calcularmos seu plano ideal
         </Text>
 
+        {/* ── Dados pessoais ── */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Dados pessoais</Text>
 
@@ -119,7 +170,7 @@ export function RegisterScreen() {
                   <FormField
                     label="Peso (kg)"
                     placeholder="70"
-                    value={value ?? ''}
+                    value={value}
                     onChangeText={onChange}
                     error={errors.weight?.message}
                     keyboardType="numeric"
@@ -136,7 +187,7 @@ export function RegisterScreen() {
                   <FormField
                     label="Altura (cm)"
                     placeholder="175"
-                    value={value ?? ''}
+                    value={value}
                     onChangeText={onChange}
                     error={errors.height?.message}
                     keyboardType="numeric"
@@ -160,6 +211,43 @@ export function RegisterScreen() {
           />
         </View>
 
+        {/* ── Nível de atividade ── */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Nível de atividade física</Text>
+          <Controller
+            control={control}
+            name="activityLevel"
+            render={({ field: { onChange, value } }) => (
+              <OptionSelector<ActivityLevel>
+                label=""
+                options={ACTIVITY_OPTIONS}
+                value={value ?? ''}
+                onChange={onChange}
+                error={errors.activityLevel?.message}
+              />
+            )}
+          />
+        </View>
+
+        {/* ── Objetivo ── */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Objetivo principal</Text>
+          <Controller
+            control={control}
+            name="goal"
+            render={({ field: { onChange, value } }) => (
+              <OptionSelector<Goal>
+                label=""
+                options={GOAL_OPTIONS}
+                value={value ?? ''}
+                onChange={onChange}
+                error={errors.goal?.message}
+              />
+            )}
+          />
+        </View>
+
+        {/* ── Segurança ── */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Segurança</Text>
 
