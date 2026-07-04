@@ -109,10 +109,26 @@ export function HomePage() {
           </p>
         </div>
 
-        {/* Placeholder treinos */}
-        <div className="card border-0 rounded-4 p-4 text-center" style={{ background: '#eef2ff' }}>
-          <p className="text-primary fw-semibold mb-1">Seus treinos aparecerão aqui em breve</p>
-          <p className="text-muted small mb-0">Estamos construindo esta seção</p>
+        {/* Ações rápidas */}
+        <div className="row g-3">
+          <div className="col-12 col-sm-6">
+            <div
+              className="card border-0 shadow-sm rounded-4 p-4 text-center h-100"
+              style={{ cursor: 'pointer', background: '#eef2ff' }}
+              onClick={() => navigate('/exercises')}
+            >
+              <div className="fs-2 mb-2">🏋️</div>
+              <p className="text-primary fw-semibold mb-1">Catálogo de Exercícios</p>
+              <p className="text-muted small mb-0">Veja todos os exercícios disponíveis</p>
+            </div>
+          </div>
+          <div className="col-12 col-sm-6">
+            <div className="card border-0 shadow-sm rounded-4 p-4 text-center h-100" style={{ background: '#f0fdf4' }}>
+              <div className="fs-2 mb-2">📅</div>
+              <p className="text-success fw-semibold mb-1">Minha Grade de Treinos</p>
+              <p className="text-muted small mb-0">Em breve</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

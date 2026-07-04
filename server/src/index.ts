@@ -2,6 +2,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import { authRoutes } from './routes/auth';
+import { exerciseRoutes } from './routes/exercise';
 import { userRoutes } from './routes/user';
 import { workoutRoutes } from './routes/workout';
 
@@ -20,6 +21,7 @@ app.get('/health', (_req, res) => {
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/workouts', workoutRoutes);
+app.use('/exercises', exerciseRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

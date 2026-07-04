@@ -43,6 +43,7 @@ model Exercise {
   id          String  @id @default(uuid())
   name        String
   muscleGroup String
+  equipment   String?
   description String?
   videoUrl    String?
 

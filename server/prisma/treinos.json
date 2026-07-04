@@ -1,0 +1,256 @@
+{
+  "exercicios_catalogo": [
+    {
+      "categoria": "Peito",
+      "regiao_corporal": "Superior",
+      "exercicios": [
+        {
+          "id": "ref_supino_reto_barra",
+          "nome": "Supino Reto com Barra",
+          "equipamento": "Barra",
+          "instrucoes": [
+            "Deite no banco plano e mantenha os pés firmes no chão.",
+            "Desça a barra de forma controlada até a linha do peito.",
+            "Empurre a barra verticalmente estendendo os braços."
+          ]
+        },
+        {
+          "id": "ref_crucifixo_inclinado_halter",
+          "nome": "Crucifixo Inclinado com Halteres",
+          "equipamento": "Halteres",
+          "instrucoes": [
+            "Ajuste o banco a um ângulo de 30 a 45 graus.",
+            "Abra os braços de forma semicircular simulando um abraço.",
+            "Feche os halteres acima do peito contraindo a musculatura."
+          ]
+        },
+        {
+          "id": "ref_supino_articulado_maquina",
+          "nome": "Supino Articulado na Máquina",
+          "equipamento": "Máquina",
+          "instrucoes": [
+            "Ajuste o banco para que as manoplas fiquem na linha do peito.",
+            "Empurre a plataforma para frente mantendo as escápulas travadas.",
+            "Retorne controladamente sem deixar os pesos encostarem."
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Costas",
+      "regiao_corporal": "Superior",
+      "exercicios": [
+        {
+          "id": "ref_puxada_alta_polia",
+          "nome": "Puxada Alta na Polia",
+          "equipamento": "Polia",
+          "instrucoes": [
+            "Segure a barra com pegada aberta e incline levemente o tronco para trás.",
+            "Puxe a barra em direção à parte superior do peito.",
+            "Retorne de forma controlada até alongar bem a dorsal."
+          ]
+        },
+        {
+          "id": "ref_remada_curvada_barra",
+          "nome": "Remada Curvada com Barra",
+          "equipamento": "Barra",
+          "instrucoes": [
+            "Incline o tronco à frente mantendo a coluna totalmente reta.",
+            "Puxe a barra em direção à linha do umbigo, esmagando as costas.",
+            "Desça o peso controladamente até a extensão dos braços."
+          ]
+        },
+        {
+          "id": "ref_remada_baixa_triangulo",
+          "nome": "Remada Baixa com Triângulo",
+          "equipamento": "Polia",
+          "instrucoes": [
+            "Sente-se na plataforma, mantenha os joelhos semiflexionados e a coluna ereta.",
+            "Puxe o triângulo em direção ao abdômen, jogando os ombros para trás.",
+            "Estenda os braços controlando o retorno da carga."
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Ombros",
+      "regiao_corporal": "Superior",
+      "exercicios": [
+        {
+          "id": "ref_desenvolvimento_halter",
+          "nome": "Desenvolvimento com Halteres",
+          "equipamento": "Halteres",
+          "instrucoes": [
+            "Sentado no banco, posicione os halteres na altura das orelhas.",
+            "Empurre os pesos para cima até quase estender os cotovelos.",
+            "Desça controladamente até a posição inicial."
+          ]
+        },
+        {
+          "id": "ref_elevacao_lateral_halter",
+          "nome": "Elevação Lateral com Halteres",
+          "equipamento": "Halteres",
+          "instrucoes": [
+            "Mantenha o corpo ereto e os braços levemente flexionados.",
+            "Eleve os halteres lateralmente até a altura dos ombros.",
+            "Controle a descida evitando balançar o corpo."
+          ]
+        },
+        {
+          "id": "ref_crucifixo_inverso_halter",
+          "nome": "Crucifixo Inverso com Halteres",
+          "equipamento": "Halteres",
+          "instrucoes": [
+            "Incline o tronco para frente, mantendo a coluna alinhada.",
+            "Eleve os halteres para os lados, focando na parte de trás dos ombros.",
+            "Aproxime as escápulas no topo do movimento e desça devagar."
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Bíceps",
+      "regiao_corporal": "Superior",
+      "exercicios": [
+        {
+          "id": "ref_rosca_direta_barra_w",
+          "nome": "Rosca Direta com Barra W",
+          "equipamento": "Barra",
+          "instrucoes": [
+            "Segure a barra W mantendo os cotovelos colados ao lado do corpo.",
+            "Flexione os braços trazendo a barra em direção ao peito.",
+            "Desça devagar resistindo à gravidade."
+          ]
+        },
+        {
+          "id": "ref_rosca_martelo_halter",
+          "nome": "Rosca Martelo com Halteres",
+          "equipamento": "Halteres",
+          "instrucoes": [
+            "Fique em pé segurando os halteres com as palmas voltadas para dentro (neutra).",
+            "Flexione os braços mantendo a pegada firme sem girar os pulsos.",
+            "Retorne à posição inicial de forma cadenciada."
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Tríceps",
+      "regiao_corporal": "Superior",
+      "exercicios": [
+        {
+          "id": "ref_triceps_polia_corda",
+          "nome": "Tríceps na Polia com Corda",
+          "equipamento": "Polia",
+          "instrucoes": [
+            "Segure a corda e trave os cotovelos firmes ao lado das costelas.",
+            "Empurre as mãos para baixo, abrindo as pontas da corda no final.",
+            "Suba controladamente sem mover os cotovelos para frente."
+          ]
+        },
+        {
+          "id": "ref_triceps_testa_barra",
+          "nome": "Tríceps Testa com Barra W",
+          "equipamento": "Barra",
+          "instrucoes": [
+            "Deitado no banco, estenda os braços segurando a barra na linha dos ombros.",
+            "Flexione apenas os cotovelos, descendo a barra em direção à testa.",
+            "Empurre a barra de volta para o alto usando a força do tríceps."
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Abdômen",
+      "regiao_corporal": "Core",
+      "exercicios": [
+        {
+          "id": "ref_abdominal_crunch_solo",
+          "nome": "Abdominal Crunch Solo",
+          "equipamento": "Peso Corporal",
+          "instrucoes": [
+            "Deite de costas com os joelhos flexionados e mãos atrás da cabeça.",
+            "Contraia o abdômen tirando as escápulas do chão e soltando o ar.",
+            "Retorne devagar sem relaxar totalmente o músculo."
+          ]
+        },
+        {
+          "id": "ref_elevacao_pernas_suspenso",
+          "nome": "Elevação de Pernas Suspenso",
+          "equipamento": "Barra Fixa",
+          "instrucoes": [
+            "Pendure-se em uma barra fixa com os braços estendidos.",
+            "Eleve as pernas retas ou flexionadas até a linha do quadril.",
+            "Controle a descida para evitar balanços."
+          ]
+        },
+        {
+          "id": "ref_prancha_abdominal",
+          "nome": "Prancha Abdominal Tradicional",
+          "equipamento": "Peso Corporal",
+          "instrucoes": [
+            "Apoie os antebraços e as pontas dos pés no chão.",
+            "Mantenha o corpo totalmente alinhado, contraindo o abdômen e glúteos.",
+            "Sustente a posição respirando de forma controlada."
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Pernas",
+      "regiao_corporal": "Inferior",
+      "exercicios": [
+        {
+          "id": "ref_agachamento_livre_barra",
+          "nome": "Agachamento Livre com Barra",
+          "equipamento": "Barra",
+          "instrucoes": [
+            "Posicione a barra sobre o trapézio e afaste os pés na largura dos ombros.",
+            "Agache projetando o quadril para trás e mantendo o alinhamento dos joelhos.",
+            "Empurre o chão para retornar à posição inicial."
+          ]
+        },
+        {
+          "id": "ref_leg_press_45",
+          "nome": "Leg Press 45 Graus",
+          "equipamento": "Máquina",
+          "instrucoes": [
+            "Sente-se no aparelho e apoie os pés na plataforma na largura dos ombros.",
+            "Destrave a máquina e desça a plataforma flexionando os joelhos até 90 graus.",
+            "Empurre a plataforma de volta sem estender os joelhos completamente (bloqueio)."
+          ]
+        },
+        {
+          "id": "ref_cadeira_extensora",
+          "nome": "Cadeira Extensora",
+          "equipamento": "Máquina",
+          "instrucoes": [
+            "Ajuste o encosto e apoie o rolo de espuma logo acima dos tornozelos.",
+            "Estenda as pernas completamente, contraindo firmemente o quadríceps.",
+            "Retorne o peso de forma lenta e controlada."
+          ]
+        },
+        {
+          "id": "ref_mesa_flexora",
+          "nome": "Mesa Flexora",
+          "equipamento": "Máquina",
+          "instrucoes": [
+            "Deite-se de bruços na mesa, posicionando o rolo atrás dos tornozelos.",
+            "Flexione os joelhos trazendo o rolo em direção ao glúteo.",
+            "Estenda as pernas controlando o retorno dos pesos."
+          ]
+        },
+        {
+          "id": "ref_panturrilha_em_pe",
+          "nome": "Elevação de Gêmeos em Pé",
+          "equipamento": "Máquina",
+          "instrucoes": [
+            "Apoie a ponta dos pés no degrau e os ombros sob os estofados.",
+            "Desça o calcanhar ao máximo para alongar a panturrilha.",
+            "Suba empurrando a ponta dos pés e contraia o músculo no topo."
+          ]
+        }
+      ]
+    }
+  ]
+}
