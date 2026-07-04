@@ -32,7 +32,7 @@ export async function listWorkouts(req: AuthRequest, res: Response) {
 
 export async function getWorkout(req: Request, res: Response) {
   const workout = await prisma.workout.findUnique({
-    where: { id: req.params.id },
+    where: { id: String(req.params.id) },
     include: {
       exercises: { include: { exercise: true }, orderBy: { order: 'asc' } },
     },
@@ -72,6 +72,6 @@ export async function createWorkout(req: AuthRequest, res: Response) {
 }
 
 export async function deleteWorkout(req: Request, res: Response) {
-  await prisma.workout.delete({ where: { id: req.params.id } });
+  await prisma.workout.delete({ where: { id: String(req.params.id) } });
   res.status(204).send();
 }
